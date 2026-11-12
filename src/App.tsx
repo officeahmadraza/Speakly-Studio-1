@@ -29,10 +29,10 @@ function VoiceStudioMain() {
   });
 
   const [config, setConfig] = useState<ServerAppConfig>({
-    isConfigured: false,
+    isConfigured: true,
     apiBaseUrl: 'https://api.ai33.pro',
-    maxTextChars: 5000,
-    requiresAccessCode: false,
+    maxTextChars: 50000,
+    requiresAccessCode: true,
   });
 
   const [voices, setVoices] = useState<Voice[]>([]);

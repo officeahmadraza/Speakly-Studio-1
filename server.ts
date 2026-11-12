@@ -274,16 +274,18 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 
 // Vite or Static Asset Integration
 const isProduction = process.env.NODE_ENV === 'production';
-const isNetlify = Boolean(process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const isServerless = Boolean(
+  process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME
+);
 
-if (!isProduction && !isNetlify) {
+if (!isProduction && !isServerless) {
   const { createServer: createViteServer } = await import('vite');
   const vite = await createViteServer({
     server: { middlewareMode: true },
     appType: 'spa',
   });
   app.use(vite.middlewares);
-} else if (!isNetlify) {
+} else if (!isServerless) {
   const distPath = path.resolve(__dirname, 'dist');
   app.use(express.static(distPath));
   app.get('*', (_req: Request, res: Response) => {
@@ -291,7 +293,7 @@ if (!isProduction && !isNetlify) {
   });
 }
 
-if (!isNetlify) {
+if (!isServerless) {
   const PORT = config.port;
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`[VoiceStudio] Server running on http://0.0.0.0:${PORT}`);
