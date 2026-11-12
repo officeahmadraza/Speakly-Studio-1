@@ -1,0 +1,6 @@
+{
+  "name": "Voice Studio — AI Text to Speech",
+  "description": "Discover authentic voices, audition acoustic previews, and craft natural AI speech powered by ElevenLabs and OpenSpeaker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
