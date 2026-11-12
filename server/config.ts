@@ -34,10 +34,10 @@ const parsedAllowlist = rawAllowlist
   .filter(Boolean);
 
 export const config: ServerConfig = {
-  apiKey: (process.env.OPENSPEAKER_API_KEY || 'sk_tcku5694nnz7n52j5culee3g71828dq2a3j4s0fy3mvccqtw').trim(),
+  apiKey: (process.env.OPENSPEAKER_API_KEY || '').trim(),
   apiBaseUrl,
   maxTextChars: isNaN(maxTextChars) || maxTextChars <= 0 ? 50000 : maxTextChars,
-  appAccessCode: (process.env.APP_ACCESS_CODE || '#161259#').trim() || null,
+  appAccessCode: (process.env.APP_ACCESS_CODE || '').trim() || null,
   audioHostAllowlist: Array.from(new Set([...defaultAllowedHosts, ...parsedAllowlist])),
   port: parseInt(process.env.PORT || '3000', 10),
 };
